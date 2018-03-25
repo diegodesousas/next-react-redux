@@ -3,11 +3,11 @@ export function addTodo(description) {
         type: 'ADD_TODO',
         description
     }
-}
+};
 
 export function removeTodo(id) {
     return {
         type: 'REMOVE_TODO',
         id
     }
-}
+};
