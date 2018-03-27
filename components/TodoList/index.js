@@ -5,6 +5,10 @@ import { connect } from 'react-redux';
 
 import * as todoActions from './actions';
 
+import { PrimaryButton, RemoveButton } from '../Button';
+import Input from '../Input';
+import { List, ListItem } from '../List';
+
 class TodoList extends Component {
 
     state = {
@@ -23,30 +27,28 @@ class TodoList extends Component {
     render() {
         return (
             <div>
-                <ul>
+                <List>
                     {
                         this.props.todos.map(todo => (
-                            <li key={todo.id}>
+                            <ListItem key={todo.id}>
                                 {todo.description} 
-                                <button onClick={() => this.removeTodo(todo.id)}>Remove</button>
-                            </li>
+                                <RemoveButton onClick={() => this.removeTodo(todo.id)}>Remove</RemoveButton>
+                            </ListItem>
                         ))
                     }
-                </ul>
-                <input 
+                </List>
+                <Input 
                     type="text"
                     value={this.state.newTodoDescription}
                     onChange={(e) => this.setState({ newTodoDescription : e.target.value })} />
-                
-                <button onClick={this.addNewTodo}>Add Todo</button>
+                    
+                <PrimaryButton onClick={this.addNewTodo}>Add Todo</PrimaryButton>
             </div>
         );
     }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(todoActions, dispatch);
-const mapStateToProps = state => ({ 
-    todos : state.todos
-});
+const mapStateToProps = state => ({ todos : state.todos });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
