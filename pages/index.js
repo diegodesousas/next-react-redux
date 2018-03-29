@@ -11,6 +11,10 @@ const HomePage = () => (
             <a>About Page</a> 
         </Link>
 
+        <Link href="/batman-tv-shows">
+            <a>Batman TV Shows</a> 
+        </Link>
+
         <TodoList />
         <TodoCounter />
     </div>
