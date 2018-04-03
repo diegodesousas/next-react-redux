@@ -1,5 +1,4 @@
-import withRedux from 'next-redux-wrapper';
-import store from '../store';
+import withReduxSaga from '../withReduxSaga';
 
 import TodoList from '../components/TodoList';
 import TodoCounter from '../components/TodoCounter';
@@ -20,4 +19,4 @@ const HomePage = () => (
     </div>
 );
 
-export default withRedux(store)(HomePage);
+export default withReduxSaga(HomePage);
