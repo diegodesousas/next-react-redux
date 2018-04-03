@@ -27,9 +27,9 @@ app
             renderAndCache(req, res, '/about')
         });
 
-        server.get('/batman-tv-shows', (req, res) => {
-            renderAndCache(req, res, '/batman-tv-shows')
-        });
+        // server.get('/batman-tv-shows', (req, res) => {
+        //     renderAndCache(req, res, '/batman-tv-shows')
+        // });
 
         server.get('*', (req, res) => {
             return handle(req, res)

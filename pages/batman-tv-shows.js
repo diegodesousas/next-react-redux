@@ -1,8 +1,4 @@
-import withRedux from 'next-redux-wrapper';
-import withSaga from 'next-redux-saga';
 import withReduxSaga from '../withReduxSaga';
-
-import store from '../store';
 
 import React, { Component } from 'react';
 import Link from 'next/link';
@@ -25,4 +21,4 @@ class Batman extends Component {
     };
 };
 
-export default withRedux(store)(withReduxSaga(Batman));
+export default withReduxSaga(Batman);

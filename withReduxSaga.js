@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import { END } from 'redux-saga';
+import withRedux from 'next-redux-wrapper';
+import store from './store';
 
 function hoc(config) {
   return BaseComponent => {
     class WrappedComponent extends Component {
-      static async getInitialProps(ctx) {
+      static async getInitialProps(context) {
         
-        const {isServer, store} = ctx;
+        const { isServer, store } = context;
         
         let props;
 
         if (BaseComponent.getInitialProps) {
-          props = await BaseComponent.getInitialProps(ctx);
+          props = await BaseComponent.getInitialProps(context);
         }
 
         // Keep saga running on the client (async mode)
@@ -32,11 +34,11 @@ function hoc(config) {
       }
 
       render() {
-        return <BaseComponent {...this.props} />
+        return <BaseComponent { ...this.props } />
       }
     }
 
-    return WrappedComponent;
+    return withRedux(store)(WrappedComponent);
   }
 }
 
@@ -47,7 +49,7 @@ function withReduxSaga(arg) {
     return hoc(defaultConfig)(arg);
   }
 
-  return hoc({...defaultConfig, ...arg});
+  return hoc({ ...defaultConfig, ...arg });
 }
 
 export default withReduxSaga;

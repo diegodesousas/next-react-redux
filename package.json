@@ -15,7 +15,6 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
     "redux": "^3.7.2",
-    "redux-devtools-extension": "^2.13.2",
     "redux-saga": "^0.16.0",
     "styled-components": "^3.2.3"
   },
@@ -23,5 +22,8 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
+  },
+  "devDependencies": {
+    "redux-devtools-extension": "^2.13.2"
   }
 }

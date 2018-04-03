@@ -3,13 +3,15 @@ import createSagaMiddleware from 'redux-saga'
 import rootReducer from './reducers'
 import rootSaga from './sagas'
 
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 const sagaMiddleware = createSagaMiddleware()
 
 function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    applyMiddleware(sagaMiddleware)
+    composeWithDevTools(applyMiddleware(sagaMiddleware))
   );
 
   store.runSagaTask = () => {
