@@ -1,11 +1,11 @@
-const express = require('express')
-const next = require('next')
-const LRUCache = require('lru-cache')
+const express = require('express');
+const next = require('next');
+const LRUCache = require('lru-cache');
 
-const port = parseInt(process.env.PORT, 10) || 3000
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dir: '.', dev })
-const handle = app.getRequestHandler()
+const port = parseInt(process.env.PORT, 10) || 3000;
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dir: '.', dev });
+const handle = app.getRequestHandler();
 
 // This is where we cache our rendered HTML pages
 const ssrCache = new LRUCache({
@@ -19,17 +19,18 @@ app
         const server = express()
 
         // Use the `renderAndCache` utility defined below to serve pages
-        server.get('/', (req, res) => {
-            renderAndCache(req, res, '/')
-        });
+        server.get('/', (req, res) => renderAndCache(req, res, '/'));
 
-        server.get('/about', (req, res) => {
-            renderAndCache(req, res, '/about')
-        });
+        server.get('/about', (req, res) => renderAndCache(req, res, '/about'));
 
-        // server.get('/batman-tv-shows', (req, res) => {
-        //     renderAndCache(req, res, '/batman-tv-shows')
-        // });
+        server.get('/batman-tv-shows', (req, res) => renderAndCache(req, res, '/batman-tv-shows'));
+
+        server.get('/bat-post/:id', (req, res) => {
+            const currentPage = '/batman-tv-show';
+            const queryParams = { id : req.params.id };
+
+            renderAndCache(req, res, currentPage, queryParams)
+        });
 
         server.get('*', (req, res) => {
             return handle(req, res)
@@ -46,7 +47,7 @@ app
  * an immediate page change (e.g a locale stored in req.session)
  */
 function getCacheKey (req) {
-  return `${req.url}`
+    return `${req.url}`
 }
 
 async function renderAndCache (req, res, pagePath, queryParams) {

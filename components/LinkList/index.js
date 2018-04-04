@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-import * as actions from './actions';
 
 import Link from 'next/link';
 
@@ -14,7 +11,7 @@ class LinkList extends Component {
             <ul>
                 {this.props.shows.map(({ show }) => (
                     <li key={show.id}>
-                        <Link as={`/bat-post/${show.id}`} href={`/post?id=${show.id}`}>
+                        <Link as={`/bat-post/${show.id}`} href={`/batman-tv-show?id=${show.id}`}>
                             <a>{show.name}</a>
                         </Link>
                     </li>
@@ -24,7 +21,6 @@ class LinkList extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
-const mapStateToProps = state => ({ shows : state.shows });
+const mapStateToProps = state => ({ shows : state.shows.all });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinkList);
+export default connect(mapStateToProps)(LinkList);

@@ -1,11 +1,13 @@
-import withReduxSaga from '../withReduxSaga';
+import withRedux from 'next-redux-wrapper';
+import store from '../store';
 
+import DefaultLayout from '../layouts';
 import TodoList from '../components/TodoList';
 import TodoCounter from '../components/TodoCounter';
 import Link from 'next/link';
 
 const HomePage = () => (
-    <div>
+    <DefaultLayout>
         <Link href="/about">
             <a>About Page</a> 
         </Link>
@@ -16,7 +18,7 @@ const HomePage = () => (
 
         <TodoList />
         <TodoCounter />
-    </div>
+    </DefaultLayout>
 );
 
-export default withReduxSaga(HomePage);
+export default withRedux(store)(HomePage);

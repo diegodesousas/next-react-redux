@@ -1,4 +1,8 @@
-import withReduxSaga from '../withReduxSaga';
+import withRedux from 'next-redux-wrapper';
+import withReduxSaga from 'next-redux-saga';
+import store from '../store';
+
+import DefaultLayout from '../layouts';
 
 import React, { Component } from 'react';
 import Link from 'next/link';
@@ -9,16 +13,16 @@ class Batman extends Component {
 
     static async getInitialProps({ store }) {
         await store.dispatch({ type: 'ASYNC_GET_TV_SHOWS' });
-    }
+    };
 
     render() {
         return (
-            <div>
-                <h1>Batman TV Shows</h1>
+            <DefaultLayout>
+                <h2>Batman TV Shows</h2>
                 <LinkList />
-            </div>
+            </DefaultLayout>
         );
     };
 };
 
-export default withReduxSaga(Batman);
+export default withRedux(store)(withReduxSaga(Batman));

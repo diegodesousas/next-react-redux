@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as todoActions from './actions';
+import * as todoActions from '../../actions/todos';
 
 import { PrimaryButton, RemoveButton } from '../Button';
 import Input from '../Input';
@@ -20,9 +20,7 @@ class TodoList extends Component {
         this.setState({ newTodoDescription: '' });
     }
 
-    removeTodo = (id) => {
-        this.props.removeTodo(id);
-    }
+    removeTodo = (id) => this.props.removeTodo(id);
 
     render() {
         return (
@@ -46,7 +44,7 @@ class TodoList extends Component {
             </div>
         );
     }
-}
+};
 
 const mapDispatchToProps = dispatch => bindActionCreators(todoActions, dispatch);
 const mapStateToProps = state => ({ todos : state.todos });

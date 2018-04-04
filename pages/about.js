@@ -1,5 +1,7 @@
+import DefaultLayout from '../layouts';
+
 export default () => (
-    <div>
+    <DefaultLayout>
         About Page
-    </div>
+    </DefaultLayout>
 );
