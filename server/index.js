@@ -13,24 +13,36 @@ const ssrCache = new LRUCache({
   maxAge: 1000 * 60 * 60 // 1hour
 })
 
+const routes = require('./routes');
+
 app
     .prepare()
     .then(() => {
-        const server = express()
+        const server = express();
+
+        routes.map(route => {
+            server.get(route.path, (req, res) => {
+                if (route.cache) {
+                    renderAndCache(req, res, route.page, route.params(req.params));
+                } else {
+                    render(req, res, route.page, route.params(req.params));
+                }
+            });
+        });
 
         // Use the `renderAndCache` utility defined below to serve pages
-        server.get('/', (req, res) => renderAndCache(req, res, '/'));
+        // server.get('/', (req, res) => renderAndCache(req, res, '/'));
 
-        server.get('/about', (req, res) => renderAndCache(req, res, '/about'));
+        // server.get('/about', (req, res) => renderAndCache(req, res, '/about'));
 
-        server.get('/batman-tv-shows', (req, res) => renderAndCache(req, res, '/batman-tv-shows'));
+        // server.get('/batman-tv-shows', (req, res) => renderAndCache(req, res, '/batman-tv-shows'));
 
-        server.get('/bat-post/:id', (req, res) => {
-            const currentPage = '/batman-tv-show';
-            const queryParams = { id : req.params.id };
+        // server.get('/bat-post/:id', (req, res) => {
+        //     const currentPage = '/batman-tv-show';
+        //     const queryParams = { id : req.params.id };
 
-            renderAndCache(req, res, currentPage, queryParams)
-        });
+        //     render(req, res, currentPage, queryParams)
+        // });
 
         server.get('*', (req, res) => {
             return handle(req, res)
@@ -77,5 +89,16 @@ async function renderAndCache (req, res, pagePath, queryParams) {
         res.send(html)
     } catch (err) {
         app.renderError(err, req, res, pagePath, queryParams)
+    }
+};
+
+async function render(req, res, pagePath, queryParams) {
+    try {
+        // If not let's render the page into HTML
+        const html = await app.renderToHTML(req, res, pagePath, queryParams);
+
+        res.send(html);
+    } catch (err) {
+        app.renderError(err, req, res, pagePath, queryParams);
     }
 }
