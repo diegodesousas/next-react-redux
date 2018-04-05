@@ -1,7 +1,7 @@
 import { 
     ADD_TODO,
     REMOVE_TODO 
-} from '../actions/todos/constants';
+} from 'actions/todos/constants';
 
 const inititalState = [];
 

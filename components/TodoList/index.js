@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as todoActions from '../../actions/todos';
+import * as todoActions from 'actions/todos';
 
-import { PrimaryButton, RemoveButton } from '../Button';
-import Input from '../Input';
-import { List, ListItem } from '../List';
+import { PrimaryButton, RemoveButton } from 'components/Button';
+import Input from 'components/Input';
+import { List, ListItem } from 'components/List';
 
 class TodoList extends Component {
 
@@ -43,7 +43,7 @@ class TodoList extends Component {
                 <PrimaryButton onClick={this.addNewTodo}>Add Todo</PrimaryButton>
             </div>
         );
-    }
+    };
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(todoActions, dispatch);

@@ -1,4 +1,4 @@
-import DefaultLayout from '../layouts';
+import DefaultLayout from 'layouts';
 
 export default () => (
     <DefaultLayout>

@@ -2,12 +2,12 @@ import React, { Component } from 'react';;
 
 import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga';
-import store from '../store';
+import store from 'store';
 
-import DefaultLayout from '../layouts';
-import TvShow from '../components/TvShow';
+import DefaultLayout from 'layouts';
+import TvShow from 'components/TvShow';
 
-import { asyncGetTvShowById } from '../actions/shows';
+import { asyncGetTvShowById } from 'actions/shows';
 
 class BatmanTvShow extends Component {
 

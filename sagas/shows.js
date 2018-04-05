@@ -1,11 +1,11 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import fetch from 'isomorphic-unfetch';
 
-import { getTvShows, getTvShow } from '../actions/shows';
+import { getTvShows, getTvShow } from 'actions/shows';
 import { 
     ASYNC_GET_TV_SHOW_BY_ID, 
     ASYNC_GET_TV_SHOWS 
-} from '../actions/shows/constants';
+} from 'actions/shows/constants';
 
 function* asyncGetTvShows(action) {
     const res = yield fetch('https://api.tvmaze.com/search/shows?q=batman');

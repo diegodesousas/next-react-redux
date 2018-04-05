@@ -1,7 +1,7 @@
 import { 
     GET_TV_SHOW_BY_ID, 
     GET_TV_SHOWS 
-} from '../actions/shows/constants';
+} from 'actions/shows/constants';
 
 const initialState = {
     all: [],
