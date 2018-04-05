@@ -23,26 +23,13 @@ app
         routes.map(route => {
             server.get(route.path, (req, res) => {
                 if (route.cache) {
+                    // Use the `renderAndCache` utility defined below to serve pages
                     renderAndCache(req, res, route.page, route.params(req.params));
                 } else {
                     render(req, res, route.page, route.params(req.params));
                 }
             });
         });
-
-        // Use the `renderAndCache` utility defined below to serve pages
-        // server.get('/', (req, res) => renderAndCache(req, res, '/'));
-
-        // server.get('/about', (req, res) => renderAndCache(req, res, '/about'));
-
-        // server.get('/batman-tv-shows', (req, res) => renderAndCache(req, res, '/batman-tv-shows'));
-
-        // server.get('/bat-post/:id', (req, res) => {
-        //     const currentPage = '/batman-tv-show';
-        //     const queryParams = { id : req.params.id };
-
-        //     render(req, res, currentPage, queryParams)
-        // });
 
         server.get('*', (req, res) => {
             return handle(req, res)
