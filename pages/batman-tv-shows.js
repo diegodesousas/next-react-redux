@@ -9,10 +9,12 @@ import Link from 'next/link';
 
 import LinkList from '../components/LinkList';
 
+import { asyncGetTvShows } from '../actions/shows';
+
 class Batman extends Component {
 
     static async getInitialProps({ store }) {
-        await store.dispatch({ type: 'ASYNC_GET_TV_SHOWS' });
+        await store.dispatch(asyncGetTvShows());
     };
 
     render() {

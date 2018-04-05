@@ -7,12 +7,14 @@ import store from '../store';
 import DefaultLayout from '../layouts';
 import TvShow from '../components/TvShow';
 
+import { asyncGetTvShowById } from '../actions/shows';
+
 class BatmanTvShow extends Component {
 
     static async getInitialProps({ store, query }) {
       const { id } = query;
 
-      await store.dispatch({ type: 'ASYNC_GET_TV_SHOW_BY_ID', id });
+      await store.dispatch(asyncGetTvShowById(id));
     };
 
     render() {
